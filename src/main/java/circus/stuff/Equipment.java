@@ -8,10 +8,6 @@ public abstract class Equipment implements Asset {
     public Equipment(int purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
-
-    public int getValue() {
-        return purchasePrice;
-    }
 }
 
 
