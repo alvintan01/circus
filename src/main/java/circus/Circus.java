@@ -1,16 +1,17 @@
 package circus;
 
-import circus.animal.Animal;
-import circus.animal.Duck;
-import circus.animal.Parrot;
+import circus.animal.*;
 import circus.stuff.Cannon;
 import circus.stuff.Equipment;
 import circus.stuff.Ladder;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Circus {
     private static Animal[] animals = {
-            new Duck(),
-            new Parrot()
+            new Duck("Drake"),
+            new Parrot("Polly")
     };
     private static Equipment[] equipments = {
             new Ladder(50),
@@ -32,14 +33,9 @@ public class Circus {
         for (Asset a : assets) {
             if (a.getValue() <= 5) {
                 System.out.println("Ignoring low value item: " + a.getValue());
-            } else {
-                total += a.getValue();
-                System.out.println("Adding item value: " + a.getValue());
-                // some 
-                // more
-                // code 
-                // here ...
+                continue;
             }
+
             total += a.getValue();
             System.out.println("Adding item value: " + a.getValue());
         }
@@ -47,8 +43,37 @@ public class Circus {
     }
 
     public static void main(String[] args) {
-        makeAnimalsTalk();
-        System.out.println("Total value of animals " + calculateAssetValue(animals));
-        System.out.println("Total value of equipments " + calculateAssetValue(equipments));
+        System.out.println("Number of animals : " + animals.length);
+//        makeAnimalsTalk();
+//        System.out.println("Total value of animals " + calculateAssetValue(animals));
+//        System.out.println("Total value of equipments " + calculateAssetValue(equipments));
+//        animals[2] = new Parrot("Dolly");
+//        System.out.println("Number of animals : " + animals.length);
+
+        ArrayList<Animal> animalArrayList = new ArrayList<>(Arrays.asList(animals));
+
+        System.out.println("Size of the array list: " + animalArrayList.size());
+        animalArrayList.add(new Parrot("Dolly"));
+        animalArrayList.add(new Duck("Goose"));
+        System.out.println("Size of the array list: " + animalArrayList.size());
+
+        Duck louie = new Duck("Louie");
+        animalArrayList.add(louie);
+        printAllAnimals(animalArrayList);
+        Elephant stroneOne = new Elephant("Strong One");
+        Tiger shareKhan = new Tiger("Share Khan");
+        System.out.println("Before sorting ... ");
+        printAllAnimals(animalArrayList);
+        System.out.println("Index of Louie : " + animalArrayList.indexOf(louie));
+
+        animalArrayList.sort(Animal.AnimalNameComparator);
+        System.out.println("After sorting ... ");
+        printAllAnimals(animalArrayList);
+    }
+
+    private static void printAllAnimals(ArrayList<Animal> animalArrayList) {
+        for (Animal a : animalArrayList){
+            System.out.println(a);
+        }
     }
 }
